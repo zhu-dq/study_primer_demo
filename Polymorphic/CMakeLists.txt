@@ -1,0 +1,10 @@
+PROJECT(main) 
+include_directories(include)
+aux_source_directory(src DIR_SRCS)
+set(MAIN ${DIR_SRCS})
+SET(CMAKE_CXX_COMPILER "g++") 
+SET(CMAKE_CXX_FLAGS "-std=c++11 -O3")
+SET(CMAKE_BUILD_TYPE Release)
+ADD_EXECUTABLE(main ${MAIN})
+#INSTALL(PROGRAMS main  DESTINATION build/ )
+
