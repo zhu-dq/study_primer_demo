@@ -51,19 +51,23 @@ private:
 	Singleton(){}
 	static void  init()
 	{
-		static T instance;
-		single = &instance;
+		single = new T();
+		std::atexit(destroy);
 	}
 	static T* single;
 	static std::once_flag single_created;
 public:
-	static T& instance()
+	static T* instance()
 	{
 		std::call_once(single_created,init);
-		return  *single;
+		return  single;
+	}
+	static void destroy()
+	{
+		delete single;
+		single = nullptr;
 	}
 };
 template<class T> T* Singleton<T>::single = nullptr;
 template<class T> std::once_flag Singleton<T>::single_created; 
-
 #endif
